@@ -24,7 +24,10 @@ const Chatbot = () => {
     setResponse(result);
     console.log("responsedata--------------", response);
   };
-  return <div></div>;
-};
+  return (
+    <>
+      <h2>Fitness Chatbot</h2>
+    </>
+  )
 
 export default Chatbot;
