@@ -1,10 +1,10 @@
 import React from "react";
-import Dashboard from "../src/Components/Dashboard";
+import Chatbot from "../src/Components/Dashboard";
 
 function App() {
   return (
     <div className="App">
-      <Dashboard />
+      <Chatbot  />
     </div>
   );
 }
