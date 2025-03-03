@@ -6,7 +6,7 @@ This is an AI-powered chatbot that generates personalized fitness plans based on
 ✅ User Registration (MongoDB)
 ✅ AI-generated Fitness Plans  ( Deepseek API )
 ✅ React Frontend + Node.js Backend
-✅ REST API Integration
+✅ REST API Integratio
 
 💡 Author
  ~ Prajwal Bopalkar
