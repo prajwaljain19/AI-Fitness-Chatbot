@@ -23,7 +23,7 @@ exports.getfitnessplan = async (req, res) => {
                 ],
             },
             {
-                Headers: {
+                headers: {
                     "Authorization": `Bearer ${process.env.BEARER_TOKEN}`,
                     "Content-Type": "application/json",
                     "HTTP-Referer": "<YOUR_SITE_URL>",  
