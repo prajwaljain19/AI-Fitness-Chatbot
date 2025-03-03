@@ -32,7 +32,6 @@ exports.getfitnessplan = async (req, res) => {
             }
         );
         const fitnessPlan = deepSeekResponse.data.choices[0].message.content.trim();
-
         res.json({fitnessPlan});
     }
     catch (err) {

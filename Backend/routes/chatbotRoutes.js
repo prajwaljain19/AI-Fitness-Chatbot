@@ -1,7 +1,7 @@
-const express = require ("express");
+const express = require("express");
+const router = express.Router();
 const { getfitnessplan } = require("../controllers/chatbotController");
 
-const router = express.Router();
-router.post("/fitness_plan",getfitnessplan);
+router.post("/fitness-plan", getfitnessplan);
 
 module.exports = router;
