@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const getFitnessPlan = async (userData) => {
   try {
-    debugger;
     console.log("Sending request with data:", userData);
     const response = await axios.post(
       "http://localhost:5000/api/chatbot/fitness-plan",

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { getFitnessPlan } from "../utils/api";
+import { ShimmerText } from "react-shimmer-effects";
 
 const Chatbot = () => {
   const [Userinput, setUserinput] = useState({
@@ -13,6 +14,7 @@ const Chatbot = () => {
   });
 
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const handleChange = (e) => {
     setUserinput({ ...Userinput, [e.target.name]: e.target.value });
@@ -22,7 +24,7 @@ const Chatbot = () => {
     e.preventDefault();
     const result = await getFitnessPlan(Userinput);
     setResponse(result);
-    console.log("responsedata--------------", response);
+    setLoading(false);
   };
   return (
     <>
@@ -71,7 +73,7 @@ const Chatbot = () => {
       {response && (
         <div>
           <h3>Your Fitness Plan:</h3>
-          <p>{response}</p>
+          {loading ? <ShimmerText line={5} gap={10} /> : <p>{response}</p>}
         </div>
       )}
     </>
