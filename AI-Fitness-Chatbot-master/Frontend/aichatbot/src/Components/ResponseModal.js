@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
+ 
 
 const ResponseModal = ({ response, onClose }) => {
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    }
+  }, []);
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Fitness Plan</h2>
-        <p className="text-gray-700 mb-4">{response}</p>
+    <div className="fixed inset-0 bg-black bg-opacity-100 flex justify-center items-center z-50 p-4">
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full max-h-[100vh] overflow-y-auto relative">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
+          YOUR FITNESS PLAN
+        </h2>
         <button
-          className="w-full py-2 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300"
           onClick={onClose}
+          className="bg-red-600 text-white px-3 py-1 rounded-md text-sm hover:bg-red-700 transition absolute top-4 right-3"
         >
-          Close
+          ✕
         </button>
+        <div className="text-blue-700 whitespace-pre-line p-4 border rounded-lg bg-gray-160 max-h-[70vh] overflow-y-auto">
+          {response}
+        </div>
       </div>
     </div>
   );
