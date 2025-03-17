@@ -22,8 +22,10 @@ const ResponseModal = ({ response, onClose }) => {
         >
           ✕
         </button>
-        <div className="text-blue-700 whitespace-pre-line p-4 border rounded-lg bg-gray-160 max-h-[70vh] overflow-y-auto">
-          {response}
+        <div className="p-5 border rounded-xl bg-gray-100 shadow-inner max-h-[65vh] overflow-y-auto">
+          <pre className="whitespace-pre-wrap text-blue-700 font-mono text-sm leading-relaxed">
+            {response}
+          </pre>
         </div>
       </div>
     </div>

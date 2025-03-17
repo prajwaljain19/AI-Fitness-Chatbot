@@ -11,6 +11,7 @@ const Chatbot = () => {
     weight: "",
     goal: "",
     activitylevel: "",
+    diettype: ""
   });
 
   const [response, setResponse] = useState(null);
@@ -128,6 +129,24 @@ const Chatbot = () => {
                 <option value="">Select Activity Level</option>
                 <option value="Sedentary">Sedentary</option>
                 <option value="Active">Active</option>
+              </select>
+              
+            </div>
+            <div className="flex flex-col space-y-3">
+              <label htmlFor=" diettype" className="text-gray-700">
+                 Diet Type
+                <br />
+              </label>
+              <select
+                name="diettype"
+                onChange={handleChange}
+                value={Userinput.diettype}
+                className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                 <option value="">Select Diet Type</option>
+                <option value="">Vegiterian</option>
+                <option value="Sedentary">Non-Vegiterian</option>
               </select>
             </div>
             <button
