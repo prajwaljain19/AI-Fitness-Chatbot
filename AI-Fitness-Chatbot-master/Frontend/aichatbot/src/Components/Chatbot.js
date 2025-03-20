@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getFitnessPlan } from "../utils/api";
 import ResponseModal from "./ResponseModal";
 import Loader from "./Loader";  
+import Pattern from "./Pattern";
 
 const Chatbot = () => {
   const [Userinput, setUserinput] = useState({
@@ -37,125 +38,64 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-600 to-purple-700 text-white font-sans">
-      <div className="container mx-auto px-4 py-10">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-2">
-            <span className="font-bold text-red-700">Fit</span>
-            <span className="text-white">Bot</span>
+    <div className="relative min-h-screen flex justify-center items-center over">
+      <Pattern />
+      <div className="relative z-10 w-full max-w-3xl p-6 bg-white rounded-xl shadow-xl">
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-800">
+            <span className="text-red-700">Fit</span>Bro
           </h1>
-          <p className="text-xl text-gray-300">
-            Your Personalized Fitness Guide
-          </p>
+          <p className="text-lg text-gray-600">Your Personalized Fitness Guide</p>
         </div>
 
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <div className="max-h-[500px] overflow-y-auto p-4">
           {loading ? (
             <Loader />
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="flex flex-col space-y-3">
-                <label htmlFor="name" className="text-gray-700">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Enter your name"
-                  onChange={handleChange}
-                  className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="flex flex-col space-y-3">
-                <label htmlFor="age" className="text-gray-700">
-                  Age
-                </label>
-                <input
-                  type="number"
-                  name="age"
-                  placeholder="Enter your age"
-                  onChange={handleChange}
-                  className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="flex flex-col space-y-3">
-                <label htmlFor="height" className="text-gray-700">
-                  Height (cm)
-                </label>
-                <input
-                  type="number"
-                  name="height"
-                  placeholder="Enter your height in cm"
-                  onChange={handleChange}
-                  value={Userinput.height}
-                  className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="flex flex-col space-y-3">
-                <label htmlFor="weight" className="text-gray-700">
-                  Weight (kg)
-                </label>
-                <input
-                  type="number"
-                  name="weight"
-                  placeholder="Enter your weight in kg"
-                  onChange={handleChange}
-                  value={Userinput.weight}
-                  className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              <div className="flex flex-col space-y-3">
-                <label htmlFor="goal" className="text-gray-700">
-                  Fitness Goal
-                </label>
-                <select
-                  name="goal"
-                  onChange={handleChange}
-                  value={Userinput.goal}
-                  className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="">Select Goal</option>
-                  <option value="Fat Loss">Fat Loss</option>
-                  <option value="Muscle Gain">Muscle Gain</option>
-                </select>
-              </div>
-              <div className="flex flex-col space-y-3">
-                <label htmlFor="activitylevel" className="text-gray-700">
-                  Activity Level
-                </label>
-                <select
-                  name="activitylevel"
-                  onChange={handleChange}
-                  value={Userinput.activitylevel}
-                  className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="">Select Activity Level</option>
-                  <option value="Sedentary">Sedentary</option>
-                  <option value="Active">Active</option>
-                </select>
-              </div>
-              <div className="flex flex-col space-y-3">
-                <label htmlFor="diettype" className="text-gray-700">
-                  Diet Type
-                </label>
-                <select
-                  name="diettype"
-                  onChange={handleChange}
-                  value={Userinput.diettype}
-                  className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
-                  required
-                >
-                  <option value="">Select Diet Type</option>
-                  <option value="Vegetarian">Vegetarian</option>
-                  <option value="Non-Vegetarian">Non-Vegetarian</option>
-                </select>
-              </div>
+              {["name", "age", "height", "weight"].map((field) => (
+                <div key={field} className="flex flex-col space-y-2">
+                  <label htmlFor={field} className="text-gray-700 capitalize">
+                    {field}
+                  </label>
+                  <input
+                    type={field === "age" || field === "height" || field === "weight" ? "number" : "text"}
+                    name={field}
+                    placeholder={`Enter your ${field}`}
+                    onChange={handleChange}
+                    value={Userinput[field]}
+                    className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+              ))}
+              
+              {[
+                { name: "goal", options: ["Fat Loss", "Muscle Gain"] },
+                { name: "activitylevel", options: ["Sedentary", "Active"] },
+                { name: "diettype", options: ["Vegetarian", "Non-Vegetarian"] }
+              ].map(({ name, options }) => (
+                <div key={name} className="flex flex-col space-y-2">
+                  <label htmlFor={name} className="text-gray-700 capitalize">
+                    {name.replace(/([A-Z])/g, " $1")}
+                  </label>
+                  <select
+                    name={name}
+                    onChange={handleChange}
+                    value={Userinput[name]}
+                    className="p-3 rounded-lg border border-gray-300 text-black focus:ring-2 focus:ring-blue-500"
+                    required
+                  >
+                    <option value="">Select {name}</option>
+                    {options.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+
               <button
                 type="submit"
                 className="w-full py-3 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300"
@@ -165,6 +105,7 @@ const Chatbot = () => {
             </form>
           )}
         </div>
+
         {isModelopen && response && (
           <ResponseModal
             response={response}

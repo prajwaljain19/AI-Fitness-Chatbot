@@ -6,7 +6,6 @@ const ResponseModal = ({ response, onClose }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    // Set loading based on response availability
     setLoading(!response);
 
     return () => {
