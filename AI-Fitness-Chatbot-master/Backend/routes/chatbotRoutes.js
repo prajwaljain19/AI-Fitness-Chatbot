@@ -4,4 +4,5 @@ const { getfitnessplan } = require("../controllers/chatbotController");
 
 router.post("/fitness-plan", getfitnessplan);
 
+
 module.exports = router;

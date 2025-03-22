@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Loader from "./Loader"; // Import the Loader component
+import Button from "./Button";
 
 const ResponseModal = ({ response, onClose }) => {
   const [loading, setLoading] = useState(true);
@@ -6,6 +8,7 @@ const ResponseModal = ({ response, onClose }) => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
+    // Set loading based on response availability
     setLoading(!response);
 
     return () => {
@@ -25,9 +28,21 @@ const ResponseModal = ({ response, onClose }) => {
         >
           ✕
         </button>
+
+        {loading ? (
+          <div className="flex justify-center items-center h-60">
+            <Loader />
+          </div>
+        ) : (
           <div className="text-blue-700 whitespace-pre-line p-4 border rounded-lg bg-gray-100 max-h-[70vh] overflow-y-auto">
             {response}
           </div>
+        )}
+
+        {/* Centering the button and improving spacing */}
+        <div className="flex justify-center mt-4">
+          <Button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition" />
+        </div>
       </div>
     </div>
   );

@@ -28,6 +28,8 @@ const Chatbot = () => {
     setLoading(true);
     try {
       const result = await getFitnessPlan(Userinput);
+
+       
       setResponse(result);
       setisModelopen(true);
     } catch (error) {
