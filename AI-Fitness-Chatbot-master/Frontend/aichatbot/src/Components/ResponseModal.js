@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Loader from "./Loader"; // Import the Loader component
+import Loader from "./Loader";  
 import Button from "./Button";
 
 const ResponseModal = ({ response, onClose }) => {
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     document.body.style.overflow = "hidden";
 
-    // Set loading based on response availability
     setLoading(!response);
 
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [response]);
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
@@ -38,10 +37,8 @@ const ResponseModal = ({ response, onClose }) => {
             {response}
           </div>
         )}
+        <div className="flex justify-center mt-3">
 
-        {/* Centering the button and improving spacing */}
-        <div className="flex justify-center mt-4">
-          <Button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition" />
         </div>
       </div>
     </div>

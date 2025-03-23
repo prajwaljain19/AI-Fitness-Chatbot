@@ -1,67 +1,61 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = ({ onClick }) => {
+const Button = ({ onClick, name}) => {
   return (
     <StyledWrapper>
-      <button className="button" onClick={onClick}>
-        <div className="inner">
-          <div className="svgs">
-            <svg viewBox="0 0 256 256" height="0.8em" width="0.8em" xmlns="http://www.w3.org/2000/svg" className="svg-l">
-              <path d="M240 128a15.79 15.79 0 0 1-10.5 15l-63.44 23.07L143 229.5a16 16 0 0 1-30 0l-23.06-63.44L26.5 143a16 16 0 0 1 0-30l63.44-23.06L113 26.5a16 16 0 0 1 30 0l23.07 63.44L229.5 113a15.79 15.79 0 0 1 10.5 15" fill="currentColor" />
-            </svg>
-            <svg viewBox="0 0 256 256" height="0.8em" width="0.8em" xmlns="http://www.w3.org/2000/svg" className="svg-s">
-              <path d="M240 128a15.79 15.79 0 0 1-10.5 15l-63.44 23.07L143 229.5a16 16 0 0 1-30 0l-23.06-63.44L26.5 143a16 16 0 0 1 0-30l63.44-23.06L113 26.5a16 16 0 0 1 30 0l23.07 63.44L229.5 113a15.79 15.79 0 0 1 10.5 15" fill="currentColor" />
-            </svg>
-          </div>
-          Generate Diet Plan
-        </div>
+      <button onClick={onClick}>
+        <span className="text">{name}</span>
       </button>
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
-  .button {
-    cursor: pointer;
-    border: solid 3px #161616;
-    border-top: none;
-    border-radius: 12px;
-    position: relative;
-    box-shadow: 0px 2px 6px #00000062, 0px 6px 20px -8px #000000a6;
-    transition: all 0.3s ease;
-  }
-  .inner {
-    padding: 8px 20px;
-    font-size: 1rem;
-    display: flex;
+  button {
     align-items: center;
-    gap: 8px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    border-bottom: solid 2px #374e72;
-    border-radius: 10px;
-    background: linear-gradient(180deg, #5771a5, #000);
-    color: #fff;
-    text-shadow: 0 0 5px #fff, 1px 1px #000;
+    background-image: linear-gradient(144deg, #af40ff, #5b42f3 50%, #00ddeb);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 1em;
+    max-width: 100%;
+    min-width: 140px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s;
   }
-  .svgs {
-    position: relative;
-    margin-top: 6px;
-    z-index: 10;
+
+  button:active,
+  button:hover {
+    outline: 0;
   }
-  .svgs > * {
-    filter: drop-shadow(0 0 4px #fff) drop-shadow(1px 1px 0px #000);
+
+  button span {
+    background-color: rgb(5, 6, 45);
+    padding: 16px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
   }
-  .svgs .svg-s {
-    position: absolute;
-    font-size: 0.6rem;
-    left: 12px;
-    top: -3px;
+
+  button:hover span {
+    background: none;
   }
-  .button:active {
-    box-shadow: none;
-  }
-`;
+
+  button:active {
+    transform: scale(0.9);
+  }`;
 
 export default Button;
