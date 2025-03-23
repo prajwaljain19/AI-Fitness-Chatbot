@@ -55,75 +55,73 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex justify-center items-center">
-      <Pattern />
-      <div className="relative z-10 w-full max-w-2xl p-6 bg-white rounded-xl shadow-xl">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">
-            <span className="text-red-700">Fit</span>Bro
-          </h1>
-          <p className="text-lg text-gray-600">Your Personalized Fitness Guide</p>
-        </div>
-        <div className="max-h-[400px] overflow-y-auto p-4">
-          {loading ? (
-            <Loader />
-          ) : (
-            <form className="space-y-6">
-              {["name", "age", "height", "weight"].map((field) => (
-                <div key={field} className="flex flex-col space-y-2">
-                  <label htmlFor={field} className="text-gray-700 capitalize">
-                    {field}
-                  </label>
-                  <input
-                    type={["age", "height", "weight"].includes(field) ? "number" : "text"}
-                    name={field}
-                    placeholder={`Enter your ${field}`}
-                    onChange={handleChange}
-                    value={Userinput[field] || ""}
-                    className="p-3 rounded-lg border border-gray-300"
-                    required
-                  />
-                </div>
-              ))}
-
-              {[
-                { name: "goal", options: ["Fat Loss", "Muscle Gain"] },
-                { name: "activitylevel", options: ["Sedentary", "Active"] },
-                { name: "diettype", options: ["Vegetarian", "Non-Vegetarian"] }
-              ].map(({ name, options }) => (
-                <div key={name} className="flex flex-col space-y-2">
-                  <label htmlFor={name} className="text-gray-700 capitalize">
-                    {name.replace(/([A-Z])/g, " $1")}
-                  </label>
-                  <select 
-                    name={name} 
-                    onChange={handleChange} 
-                    value={Userinput[name] || ""} 
-                    className="p-3 rounded-lg border border-gray-300"
-                  >
-                    <option value="">Select {name}</option>
-                    {options.map(option => <option key={option} value={option}>{option}</option>)}
-                  </select>
-                </div>
-              ))}
-            </form>
-          )}
-        </div>
-        <div className="sticky bottom-0 left-0 right-0 pt-10 flex justify-between">
-          <Button onClick={() => fetchPlan("fitness")} name={"Generate Fitness Plan"} />
-          <Button onClick={() => fetchPlan("diet")} name={"Generate Diet Plan"} />
-        </div>
-
-        {/* Custom Toast Notification */}
-        {toast.message && (
-          <CustomToast message={toast.message} type={toast.type} onClose={() => setToast({ message: "", type: "" })} />
-        )}
-
-        {isModelopen && response && (
-          <ResponseModal response={response} onClose={() => setisModelopen(false)} />
-        )}
-      </div>
+<div className="relative min-h-screen flex justify-center items-center px-4 sm:px-6 lg:px-8">
+  <Pattern />
+  <div className="relative z-10 w-full max-w-2xl p-6 bg-white rounded-xl shadow-xl">
+    <div className="text-center mb-6">
+      <h1 className="text-3xl font-bold text-gray-800">
+        <span className="text-red-700">Fit</span>Bro
+      </h1>
+      <p className="text-lg text-gray-600">Your Personalized Fitness Guide</p>
     </div>
+    <div className="max-h-[400px] overflow-y-auto p-4">
+      {loading ? (
+        <Loader />
+      ) : (
+        <form className="space-y-6">
+          {["name", "age", "height", "weight"].map((field) => (
+            <div key={field} className="flex flex-col space-y-2">
+              <label htmlFor={field} className="text-gray-700 capitalize">
+                {field}
+              </label>
+              <input
+                type={["age", "height", "weight"].includes(field) ? "number" : "text"}
+                name={field}
+                placeholder={`Enter your ${field}`}
+                onChange={handleChange}
+                value={Userinput[field] || ""}
+                className="p-3 rounded-lg border border-gray-300 w-full"
+                required
+              />
+            </div>
+          ))}
+
+          {[
+            { name: "goal", options: ["Fat Loss", "Muscle Gain"] },
+            { name: "activitylevel", options: ["Sedentary", "Active"] },
+            { name: "diettype", options: ["Vegetarian", "Non-Vegetarian"] }
+          ].map(({ name, options }) => (
+            <div key={name} className="flex flex-col space-y-2">
+              <label htmlFor={name} className="text-gray-700 capitalize">
+                {name.replace(/([A-Z])/g, " $1")}
+              </label>
+              <select 
+                name={name} 
+                onChange={handleChange} 
+                value={Userinput[name] || ""} 
+                className="p-3 rounded-lg border border-gray-300 w-full"
+              >
+                <option value="">Select {name}</option>
+                {options.map(option => <option key={option} value={option}>{option}</option>)}
+              </select>
+            </div>
+          ))}
+        </form>
+      )}
+    </div>
+    <div className="sticky bottom-0 left-0 right-0 pt-10 flex flex-col sm:flex-row gap-4 justify-between">
+      <Button onClick={() => fetchPlan("fitness")} name={"Generate Fitness Plan"} />
+      <Button onClick={() => fetchPlan("diet")} name={"Generate Diet Plan"} />
+    </div>
+    {toast.message && (
+      <CustomToast message={toast.message} type={toast.type} onClose={() => setToast({ message: "", type: "" })} />
+    )}
+
+    {isModelopen && response && (
+      <ResponseModal response={response} onClose={() => setisModelopen(false)} />
+    )}
+  </div>
+</div>
   );
 };
 
